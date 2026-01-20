@@ -8,10 +8,10 @@
 #define HEIGHT 20
 #define MAX_LENGTH 800
 
-// Arah gerakan
+
 typedef enum { STOP = 0, LEFT, RIGHT, UP, DOWN } Direction;
 
-// Struktur game
+
 typedef struct {
     int x[MAX_LENGTH];
     int y[MAX_LENGTH];
@@ -31,7 +31,6 @@ typedef struct {
     int speed;
 } Game;
 
-// Fungsi utilitas
 void gotoxy(int x, int y) {
     COORD coord;
     coord.X = x;
@@ -50,18 +49,15 @@ void setColor(int color) {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
 }
 
-// Inisialisasi game
 void initGame(Game *game) {
     game->snake.length = 3;
     game->snake.dir = RIGHT;
-    
-    // Posisi awal ular di tengah
+
     for (int i = 0; i < game->snake.length; i++) {
         game->snake.x[i] = WIDTH / 2 - i;
         game->snake.y[i] = HEIGHT / 2;
     }
-    
-    // Spawn makanan random
+
     srand(time(NULL));
     game->food.x = rand() % (WIDTH - 2) + 1;
     game->food.y = rand() % (HEIGHT - 2) + 1;
@@ -71,9 +67,8 @@ void initGame(Game *game) {
     game->speed = 100;
 }
 
-// Gambar border
 void drawBorder() {
-    setColor(11); // Cyan terang
+    setColor(11); 
     for (int i = 0; i < WIDTH; i++) {
         gotoxy(i, 0);
         printf("═");
@@ -92,7 +87,7 @@ void drawBorder() {
     gotoxy(WIDTH - 1, HEIGHT - 1); printf("╝");
 }
 
-// Gambar UI
+
 void drawUI(Game *game) {
     setColor(14); // Yellow
     gotoxy(WIDTH + 2, 2);
